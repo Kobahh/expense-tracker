@@ -11,16 +11,29 @@ def index():
     if user_id is None:
         return redirect(url_for('login'))
 
+    error = None
+
     if request.method == 'POST':
         amount = request.form['amount']
         category = request.form['category']
         description = request.form['description']
         date = request.form['date']
-        connection = sqlite3.connect('database.db')
-        cursor = connection.cursor()
-        cursor.execute('INSERT INTO expenses(amount, category, description, date, user_id) VALUES (?,?,?,?,?)', (amount, category, description, date, user_id))
-        connection.commit()
-        connection.close()
+        try:
+            amount = float(amount)
+            if amount <= 0:
+                error = 'Amount must be greater than 0'
+        except ValueError:
+            error = 'Invalid amount'
+
+        if not category or not description:
+            error = 'Category and description are required'
+
+        if error is None:
+            connection = sqlite3.connect('database.db')
+            cursor = connection.cursor()
+            cursor.execute('INSERT INTO expenses(amount, category, description, date, user_id) VALUES (?,?,?,?,?)', (amount, category, description, date, user_id))
+            connection.commit()
+            connection.close()
 
     connection = sqlite3.connect('database.db')
     cursor = connection.cursor()
@@ -35,7 +48,7 @@ def index():
     cursor.execute('SELECT category, SUM(amount) FROM expenses WHERE user_id = ? GROUP BY category', (user_id,))
     category_totals = cursor.fetchall()
     connection.close()
-    return render_template('index.html', username=user[0], expenses=expenses, total=total, category_totals=category_totals)
+    return render_template('index.html', username=user[0], expenses=expenses, total=total, category_totals=category_totals, error=error)
 
 @app.route('/register', methods= ['GET', 'POST'])
 def register():
