@@ -1,9 +1,12 @@
 import flask
 import sqlite3
+import os
+from database import init_db
 from flask import render_template, request, session, redirect, url_for
 from werkzeug.security import generate_password_hash, check_password_hash
 app = flask.Flask(__name__)
-app.secret_key = 'some-random-secret_key'
+app.secret_key = os.environ.get('SECRET_KEY', 'some-random-secret_key')
+init_db()
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -39,6 +42,8 @@ def index():
     cursor = connection.cursor()
     cursor.execute('SELECT username FROM users WHERE id = ?', (user_id,))
     user = cursor.fetchone()
+    if user is None:
+        return redirect(url_for('login'))
     cursor.execute('SELECT * FROM expenses WHERE user_id = ?', (user_id,))
     expenses = cursor.fetchall()
     cursor.execute('SELECT SUM(amount) FROM expenses WHERE user_id = ?', (user_id,))
