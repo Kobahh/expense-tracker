@@ -72,8 +72,10 @@ def register():
            return render_template('register.html', error='Username already taken')
        cursor.execute('INSERT INTO users (username, password) VALUES (?, ?)',(username, hashed_password))
        connection.commit()
+       existing_id = cursor.lastrowid
        connection.close()
-       print(f"USERNAME:{username}, PASSWORD:{hashed_password}")
+       session['user_id'] = existing_id
+       return redirect(url_for('index'))
     return render_template('register.html')
 
 @app.route('/login', methods=['GET','POST'])
