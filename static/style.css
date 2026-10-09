@@ -25,6 +25,11 @@ body {
     line-height: 1.5;
 }
 
+button,
+input {
+    font-family: inherit;
+}
+
 h1 {
     color: var(--mint);
     margin-bottom: 4px;
@@ -120,13 +125,34 @@ p.error {
     margin: 10px 0;
 }
 
+.expense .actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
 .expense .actions a {
-    margin-right: 12px;
     font-size: 0.9em;
 }
 
-.expense .actions a[href*="delete"] {
+form.inline-form {
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    display: inline;
+}
+
+.delete-btn {
+    background: none;
     color: var(--pink);
+    padding: 0;
+    font-size: 0.9em;
+    font-weight: normal;
+}
+
+.delete-btn:hover {
+    text-decoration: underline;
 }
 
 /* Category totals */

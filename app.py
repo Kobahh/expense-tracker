@@ -123,7 +123,7 @@ def edit_expense(expense_id):
     return render_template('edit_expense.html', expense=expense)
 
 
-@app.route('/delete-expense/<int:expense_id>')
+@app.route('/delete-expense/<int:expense_id>', methods=['POST'])
 def delete_expense(expense_id):
     user_id = session.get('user_id')
     if user_id is None:
