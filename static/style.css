@@ -25,6 +25,11 @@ body {
     line-height: 1.5;
 }
 
+button,
+input {
+    font-family: inherit;
+}
+
 h1 {
     color: var(--mint);
     margin-bottom: 4px;
@@ -120,28 +125,14 @@ p.error {
     margin: 10px 0;
 }
 
-.expense .actions a {
-    margin-right: 12px;
-    font-size: 0.9em;
-}
-
-/* Category totals */
-.category-total {
-    color: var(--blue);
-}
-
-/* Overall total */
-.total {
-    color: var(--mint);
-    font-size: 1.2em;
-    font-weight: bold;
-    margin-top: 16px;
-}
-
 .expense .actions {
     display: flex;
     align-items: center;
     gap: 12px;
+}
+
+.expense .actions a {
+    font-size: 0.9em;
 }
 
 form.inline-form {
@@ -162,4 +153,17 @@ form.inline-form {
 
 .delete-btn:hover {
     text-decoration: underline;
+}
+
+/* Category totals */
+.category-total {
+    color: var(--blue);
+}
+
+/* Overall total */
+.total {
+    color: var(--mint);
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-top: 16px;
 }
