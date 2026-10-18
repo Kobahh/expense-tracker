@@ -1,10 +1,12 @@
 import flask
 import sqlite3
 import os
+from flask_wtf.csrf import CSRFProtect
 from database import init_db
 from flask import render_template, request, session, redirect, url_for
 from werkzeug.security import generate_password_hash, check_password_hash
 app = flask.Flask(__name__)
+csrf = CSRFProtect(app)
 app.secret_key = os.environ.get('SECRET_KEY', 'some-random-secret_key')
 init_db()
 

@@ -24,7 +24,7 @@
 
         <label>Date:</label>
         <input type="date" name="date">
-
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
         <button type="submit">Add Expense</button>
     </form>
     {% for expense in expenses %}
@@ -33,6 +33,7 @@
         <div class="actions">
             <a href="/edit_expense/{{ expense[0] }}">Edit</a>
             <form class="inline-form" action="/delete-expense/{{ expense[0] }}" method="POST">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                 <button class="delete-btn" type="submit">Delete</button>
             </form>
         </div>

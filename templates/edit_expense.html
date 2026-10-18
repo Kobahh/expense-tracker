@@ -17,6 +17,7 @@
 
         <label>Date:</label>
         <input type="date" name="date" value="{{ expense[5] }}">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
 
         <button type="submit">Update Expense</button>
     </form>
