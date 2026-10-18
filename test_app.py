@@ -15,3 +15,8 @@ def test_homepage_redirects_when_logged_out():
     response = client.get('/')
     assert response.status_code == 302
     assert response.headers['Location'].endswith('/login')
+
+def test_csrf_token():
+    client = app.test_client()
+    response = client.post('/login', data={'username': 'x', 'password': 'y'})
+    assert response.status_code == 400
