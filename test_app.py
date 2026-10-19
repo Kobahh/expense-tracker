@@ -20,3 +20,8 @@ def test_csrf_token():
     client = app.test_client()
     response = client.post('/login', data={'username': 'x', 'password': 'y'})
     assert response.status_code == 400
+
+def test_logout_rejects_get():
+    client = app.test_client()
+    response = client.get('/logout')
+    assert response.status_code == 405

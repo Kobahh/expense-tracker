@@ -48,14 +48,6 @@ a:hover {
     text-decoration: underline;
 }
 
-/* Logout link, top of page */
-body > a[href*="logout"] {
-    display: inline-block;
-    margin-bottom: 16px;
-    color: var(--pink);
-    font-weight: bold;
-}
-
 /* Register/Login link, top of page */
 .auth-link {
     color: var(--pink);
@@ -153,6 +145,25 @@ form.inline-form {
 
 .delete-btn:hover {
     text-decoration: underline;
+}
+
+/* Logout button, top of page */
+.logout-btn {
+    background: none;
+    color: var(--pink);
+    padding: 0;
+    font-size: 1em;
+    font-weight: bold;
+}
+
+.logout-btn:hover {
+    text-decoration: underline;
+}
+
+/* Keeps the logout form at the top of the page, with the spacing the old link had */
+body > form.inline-form {
+    display: block;
+    margin-bottom: 16px;
 }
 
 /* Category totals */
