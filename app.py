@@ -8,6 +8,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 app = flask.Flask(__name__)
 csrf = CSRFProtect(app)
 app.secret_key = os.environ.get('SECRET_KEY', 'some-random-secret_key')
+app.config['SESSION_COOKIE_SAMESITE'] = 'Lax'
 init_db()
 
 @app.route('/', methods=['GET', 'POST'])
@@ -138,7 +139,7 @@ def delete_expense(expense_id):
     connection.close()
     return redirect(url_for('index'))
 
-@app.route('/logout')
+@app.route('/logout', methods=['POST'])
 def logout():
     session.pop('user_id', None)
     return redirect(url_for('login'))

@@ -5,7 +5,10 @@
     <title>Expense Tracker</title>
 </head>
 <body>
-    <a href="{{ url_for('logout') }}">Logout</a>
+    <form class="inline-form" action="/logout" method="POST">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <button class="logout-btn" type="submit">Logout</button>
+    </form>
     <h1>Expense Tracker</h1>
     <p>Welcome to your Expense Tracker, {{ username }}!</p>
     {% if error %}
